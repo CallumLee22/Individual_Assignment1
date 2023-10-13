@@ -6,6 +6,20 @@ public class Main
 
     public static void main(String[] args)
     {
+        ArrayList<Song> songList = addInitialSongs();
+
+        printSongs(songList);
+
+        int choice = menu(songList);
+
+        if (choice == 1)
+        {
+            songList = removeSong(songList);
+        }
+    }
+
+    private static ArrayList<Song> addInitialSongs()
+    {
         Song Believer = new Song("Believer", "Imagine Dragons", 1203500);
         Song Skyfall = new Song("Skyfall", "Adele", 14527013);
         Song Brazil = new Song("Brazil", "Declan McKenna", 123230);
@@ -30,9 +44,7 @@ public class Main
         songList.add(Waterloo);
         songList.add(Perfect);
 
-        printSongs(songList);
-
-        menu();
+        return songList;
     }
 
     private static void printSongs(ArrayList<Song> songList)
@@ -48,7 +60,7 @@ public class Main
         }
     }
 
-    private static void menu()
+    private static int menu(ArrayList<Song> songList)
     {
 
         int choice = 0;
@@ -70,17 +82,23 @@ public class Main
             System.out.println();
             System.out.println();
             scanner.nextLine();
-            menu();
+            menu(songList);
         }
 
-        if (choice == 1)
+        if (choice < 1 || choice > 3)
         {
+            System.out.println("Number out of range");
+            System.out.println("Please enter a number between 1 and 3");
+            System.out.println();
+            System.out.println();
+            menu(songList);
         }
-        else if (choice == 2)
-        {
-        }
-        else if (choice == 3)
-        {
-        }
+
+        return choice;
+    }
+
+    private static ArrayList<Song> removeSong(ArrayList<Song> songList)
+    {
+        return songList;
     }
 }
