@@ -28,8 +28,12 @@ public class Main
         songList.add(Waterloo);
         songList.add(Perfect);
 
-        int i = 0;
+        PrintSongs(songList);
+    }
 
+    private static void PrintSongs(ArrayList<Song> songList)
+    {
+        int i = 0;
         for (Song songs : songList)
         {
             System.out.println("----------------------------------");
