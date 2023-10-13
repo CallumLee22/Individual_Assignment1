@@ -27,5 +27,16 @@ public class Main
         songList.add(Riptide);
         songList.add(Waterloo);
         songList.add(Perfect);
+
+        int i = 0;
+
+        for (Song songs : songList)
+        {
+            System.out.println("----------------------------------");
+            System.out.println("Title: " + songList.get(i).title);
+            System.out.println("Artist: " + songList.get(i).artist);
+            System.out.println("Play Count: " + songList.get(i).playCount);
+            i ++;
+        }
     }
 }
