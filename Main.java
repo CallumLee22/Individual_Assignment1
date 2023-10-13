@@ -1,7 +1,9 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main
 {
+    public static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args)
     {
         Song Believer = new Song("Believer", "Imagine Dragons", 1203500);
@@ -28,10 +30,12 @@ public class Main
         songList.add(Waterloo);
         songList.add(Perfect);
 
-        PrintSongs(songList);
+        printSongs(songList);
+
+        menu();
     }
 
-    private static void PrintSongs(ArrayList<Song> songList)
+    private static void printSongs(ArrayList<Song> songList)
     {
         int i = 0;
         for (Song songs : songList)
@@ -41,6 +45,42 @@ public class Main
             System.out.println("Artist: " + songList.get(i).artist);
             System.out.println("Play Count: " + songList.get(i).playCount);
             i ++;
+        }
+    }
+
+    private static void menu()
+    {
+
+        int choice = 0;
+        try
+        {
+            System.out.println();
+            System.out.println("Action Menu");
+            System.out.println("----------------------------------");
+            System.out.println("1. Remove a song");
+            System.out.println("2. Filter songs by number of plays");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice:");
+            choice = scanner.nextInt();
+        }
+        catch(InputMismatchException exception)
+        {
+            System.out.println("INCORRECT INPUT");
+            System.out.println("Please only input whole numbers");
+            System.out.println();
+            System.out.println();
+            scanner.nextLine();
+            menu();
+        }
+
+        if (choice == 1)
+        {
+        }
+        else if (choice == 2)
+        {
+        }
+        else if (choice == 3)
+        {
         }
     }
 }
