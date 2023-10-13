@@ -99,6 +99,41 @@ public class Main
 
     private static ArrayList<Song> removeSong(ArrayList<Song> songList)
     {
+        int i = 0;
+        for (Song songs : songList)
+        {
+            System.out.println("----------------------");
+            System.out.println((i + 1) + ". " + songList.get(i).title);
+
+            i ++;
+        }
+        
+        int choice = 0;
+        
+        try
+        {
+            System.out.print("Enter the song number to delete: ");
+            choice = scanner.nextInt();
+        }
+        catch(InputMismatchException exception)
+        {
+            System.out.println("INCORRECT INPUT");
+            System.out.println("Please only input whole numbers");
+            System.out.println();
+            System.out.println();
+            scanner.nextLine();
+            removeSong(songList);
+        }
+
+        if (choice < 1 || choice > (songList.size()))
+        {
+            System.out.println("Number is out of range");
+            System.out.println("Please only  enter a number between 1 and " + songList.size());
+            System.out.println();
+            System.out.println();
+            removeSong(songList);
+        }
+
         return songList;
     }
 }
