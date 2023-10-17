@@ -6,6 +6,7 @@ public class Main
 
     public static void main(String[] args)
     {
+        //Only called at the start of program to ensure that songList is not reset later
         ArrayList<Song> songList = addInitialSongs();
         mainProcess(songList);
     }
@@ -28,10 +29,11 @@ public class Main
         }
         else if (choice == 3)
         {
-
+            filterSongs(songList);
         }
         else if (choice == 4)
         {
+            //Exits program
             System.out.println("Exiting program...");
             System.exit(0);
         }
@@ -39,6 +41,7 @@ public class Main
 
     private static ArrayList<Song> addInitialSongs()
     {
+        //Adds preset songs to songList
         Song Believer = new Song("Believer", "Imagine Dragons", 1203500);
         Song Skyfall = new Song("Skyfall", "Adele", 14527013);
         Song Brazil = new Song("Brazil", "Declan McKenna", 123230);
@@ -68,6 +71,7 @@ public class Main
 
     private static void printSongs(ArrayList<Song> songList)
     {
+        //Loops though songList to print all attributes
         int i = 0;
         for (Song songs : songList)
         {
@@ -81,6 +85,7 @@ public class Main
 
     private static int menu(ArrayList<Song> songList)
     {
+        //Allows user to choose which function they would like to use
 
         int choice = 0;
         try
@@ -98,6 +103,7 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
+            //Catches exception if user enters a non-integer value
             System.out.println("INCORRECT INPUT");
             System.out.println("Please only input whole numbers");
             System.out.println();
@@ -108,6 +114,7 @@ public class Main
 
         if (choice < 1 || choice > 4)
         {
+            //Makes user retry input if they enter a number where a song does not exist
             System.out.println("Number out of range");
             System.out.println("Please enter a number between 1 and 4");
             System.out.println();
@@ -120,12 +127,14 @@ public class Main
 
     private static ArrayList<Song> addSong(ArrayList<Song> songList)
     {
+        //Allows a user to add a cutom song to the list
         String title = "";
         String artist = "";
         int playCount = 0;
 
         try
         {
+            //Asks user to enter details of desired song
             System.out.print("Enter the name of the song: ");
             title = scanner.next();
 
@@ -145,6 +154,7 @@ public class Main
             addSong(songList);
         }
 
+        //Adds new song object to songList
         Song userSong = new Song(title, artist, playCount);
         songList.add(userSong);
 
@@ -153,6 +163,8 @@ public class Main
 
     private static ArrayList<Song> removeSong(ArrayList<Song> songList)
     {
+        //Allows a user to remove a song from songList
+        //Loops through songList to display names of songs that user can choose to remvoe
         int i = 0;
         for (Song songs : songList)
         {
@@ -181,6 +193,7 @@ public class Main
 
         if (choice < 1 || choice > (songList.size()))
         {
+            //Ensures that user enters the number of a song that exists
             System.out.println("Number is out of range");
             System.out.println("Please only  enter a number between 1 and " + songList.size());
             System.out.println();
@@ -188,8 +201,24 @@ public class Main
             removeSong(songList);
         }
 
+        //Removes chosen song
         songList.remove(choice - 1);
 
         return songList;
+    }
+
+    private static void filterSongs(ArrayList<Song> songList)
+    {
+        //Allows user to filter songs out that are below a certain number of plays
+        int filterBy;
+
+        try
+        {
+            System.out.print("Enter ");
+        }
+        catch(InputMismatchException exception)
+        {
+
+        }
     }
 }
