@@ -7,14 +7,19 @@ public class Main
     public static void main(String[] args)
     {
         ArrayList<Song> songList = addInitialSongs();
+        mainProcess(songList);
+    }
 
+    private static void mainProcess(ArrayList<Song> songList)
+    {
         printSongs(songList);
 
         int choice = menu(songList);
 
         if (choice == 1)
         {
-            songList = AddSong(songList);
+            songList = addSong(songList);
+            mainProcess(songList);
         }
         else if (choice == 2)
         {
@@ -71,13 +76,14 @@ public class Main
         try
         {
             System.out.println();
+            System.out.println("----------------------------------");
             System.out.println("Action Menu");
             System.out.println("----------------------------------");
             System.out.println("1. Add new song");
             System.out.println("2. Remove a song");
             System.out.println("3. Filter songs by number of plays");
             System.out.println("4. Exit");
-            System.out.print("Enter your choice:");
+            System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
         }
         catch(InputMismatchException exception)
@@ -102,11 +108,11 @@ public class Main
         return choice;
     }
 
-    private static ArrayList<Song> AddSong(ArrayList<Song> songList)
+    private static ArrayList<Song> addSong(ArrayList<Song> songList)
     {
-        String title;
-        String artist;
-        int playCount;
+        String title = "";
+        String artist = "";
+        int playCount = 0;
 
         try
         {
@@ -126,10 +132,11 @@ public class Main
             System.out.println();
             System.out.println();
             scanner.nextLine();
-            AddSong(songList);
+            addSong(songList);
         }
 
-        
+        Song userSong = new Song(title, artist, playCount);
+        songList.add(userSong);
 
         return songList;
     }
