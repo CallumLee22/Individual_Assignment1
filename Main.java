@@ -14,6 +14,10 @@ public class Main
 
         if (choice == 1)
         {
+            songList = AddSong(songList);
+        }
+        else if (choice == 2)
+        {
             songList = removeSong(songList);
         }
     }
@@ -69,9 +73,10 @@ public class Main
             System.out.println();
             System.out.println("Action Menu");
             System.out.println("----------------------------------");
-            System.out.println("1. Remove a song");
-            System.out.println("2. Filter songs by number of plays");
-            System.out.println("3. Exit");
+            System.out.println("1. Add new song");
+            System.out.println("2. Remove a song");
+            System.out.println("3. Filter songs by number of plays");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice:");
             choice = scanner.nextInt();
         }
@@ -85,16 +90,48 @@ public class Main
             menu(songList);
         }
 
-        if (choice < 1 || choice > 3)
+        if (choice < 1 || choice > 4)
         {
             System.out.println("Number out of range");
-            System.out.println("Please enter a number between 1 and 3");
+            System.out.println("Please enter a number between 1 and 4");
             System.out.println();
             System.out.println();
             menu(songList);
         }
 
         return choice;
+    }
+
+    private static ArrayList<Song> AddSong(ArrayList<Song> songList)
+    {
+        String title;
+        String artist;
+        int playCount;
+
+        try
+        {
+            System.out.print("Enter the name of the song: ");
+            title = scanner.next();
+
+            System.out.print("Enter the artist: ");
+            artist = scanner.next();
+
+            System.out.print("Enter the number of plays: ");
+            playCount = scanner.nextInt();
+        }
+        catch(InputMismatchException exception)
+        {
+            System.out.println("INVALID INPUT");
+            System.out.println("Please only input valid data types");
+            System.out.println();
+            System.out.println();
+            scanner.nextLine();
+            AddSong(songList);
+        }
+
+        
+
+        return songList;
     }
 
     private static ArrayList<Song> removeSong(ArrayList<Song> songList)
