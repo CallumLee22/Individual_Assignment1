@@ -210,13 +210,46 @@ public class Main
     private static void filterSongs(ArrayList<Song> songList)
     {
         //Allows user to filter songs out that are below a certain number of plays
-        int filterBy;
+        int filterBy = 0;
 
         try
         {
-            System.out.print("Enter ");
+            System.out.print("Enter number of plays to filter by: ");
+            filterBy = scanner.nextInt();
         }
         catch(InputMismatchException exception)
+        {
+            //Catches exception if user enters a non-integer value
+            System.out.println("INCORRECT INPUT");
+            System.out.println("Please only input whole numbers");
+            System.out.println();
+            System.out.println();
+            scanner.nextLine();
+            filterSongs(songList);
+        }
+
+        int i = 0;
+        for (Song songs : songList)
+        {
+            if (songList.get(i).playCount > filterBy)
+            {
+            System.out.println("----------------------------------");
+            System.out.println("Title: " + songList.get(i).title);
+            System.out.println("Artist: " + songList.get(i).artist);
+            System.out.println("Play Count: " + songList.get(i).playCount);
+            }
+            i ++;
+        }
+
+        System.out.println();
+        System.out.println("Press enter to return to main menu");
+        
+        try
+        {
+            System.in.read();
+            scanner.nextLine();
+        }
+        catch(Exception e)
         {
 
         }
