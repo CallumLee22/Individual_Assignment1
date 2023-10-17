@@ -24,6 +24,16 @@ public class Main
         else if (choice == 2)
         {
             songList = removeSong(songList);
+            mainProcess(songList);
+        }
+        else if (choice == 3)
+        {
+
+        }
+        else if (choice == 4)
+        {
+            System.out.println("Exiting program...");
+            System.exit(0);
         }
     }
 
@@ -177,6 +187,8 @@ public class Main
             System.out.println();
             removeSong(songList);
         }
+
+        songList.remove(choice - 1);
 
         return songList;
     }
