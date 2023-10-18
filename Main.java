@@ -95,14 +95,16 @@ public class Main
         try
         {
             System.out.println();
-            System.out.println("----------------------------------");
-            System.out.println("Action Menu");
-            System.out.println("----------------------------------");
-            System.out.println("1. Add new song");
-            System.out.println("2. Remove a song");
-            System.out.println("3. Filter songs by number of plays");
-            System.out.println("4. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print("""
+                            ----------------------------------
+                            Action Menu
+                            ----------------------------------
+                            1. Add new song
+                            2. Remove a song
+                            3. Filter songs by number of plays
+                            4. Exit
+                            Enter your choice: 
+                            """);
             choice = scanner.nextInt();
         }
         catch(InputMismatchException exception)
@@ -187,10 +189,14 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
-            System.out.println("INCORRECT INPUT");
-            System.out.println("Please only input whole numbers");
-            System.out.println();
-            System.out.println();
+            System.out.println("""
+
+                                INCORRECT INPUT
+                                Please only input whole numbers
+
+                                """);
+            
+            
             scanner.nextLine();
             removeSong(songList);
         }
@@ -198,10 +204,16 @@ public class Main
         if (choice < 1 || choice > (songList.size()))
         {
             //Ensures that user enters the number of a song that exists
-            System.out.println("Number is out of range");
-            System.out.println("Please only  enter a number between 1 and " + songList.size());
-            System.out.println();
-            System.out.println();
+            System.out.println("""
+                
+                                Number is out of range
+                                Please only  enter a number between 1 and """ + songList.size() +
+                                """
+
+
+                                """);
+                    
+    
             removeSong(songList);
         }
 
