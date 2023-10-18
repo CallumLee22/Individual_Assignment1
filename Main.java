@@ -17,25 +17,29 @@ public class Main
 
         int choice = menu(songList);
 
-        if (choice == 1)
+        switch (choice)
         {
-            songList = addSong(songList);
-            mainProcess(songList);
-        }
-        else if (choice == 2)
-        {
-            songList = removeSong(songList);
-            mainProcess(songList);
-        }
-        else if (choice == 3)
-        {
-            filterSongs(songList);
-        }
-        else if (choice == 4)
-        {
-            //Exits program
-            System.out.println("Exiting program...");
-            System.exit(0);
+            case 1:
+                songList = addSong(songList);
+                mainProcess(songList);
+        
+            case 2:
+        
+                songList = removeSong(songList);
+                mainProcess(songList);
+        
+            case 3:
+        
+                filterSongs(songList);
+        
+            case 4:
+        
+                //Exits program
+                System.out.println("Exiting program...");
+                System.exit(0);
+
+           default:
+                break;
         }
     }
 
