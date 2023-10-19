@@ -75,9 +75,10 @@ public class Main
 
     private static void printSongs(ArrayList<Song> songList)
     {
-        if (songList.size() == 0)
+        if (songList.isEmpty())
         {
             System.out.println("""
+                
                                 No songs in list, please add a song
 
 
@@ -188,108 +189,117 @@ public class Main
 
     private static ArrayList<Song> removeSong(ArrayList<Song> songList)
     {
-        //Allows a user to remove a song from songList
-        //Loops through songList to display names of songs that user can choose to remvoe
-        int i = 0;
-        for (Song songs : songList)
+        //Only allows user to remove a song if there are songs to remove
+        if (! songList.isEmpty())
         {
-            System.out.println("----------------------");
-            System.out.println((i + 1) + ". " + songList.get(i).title);
+            //Allows a user to remove a song from songList
+            //Loops through songList to display names of songs that user can choose to remvoe
+            int i = 0;
+            for (Song songs : songList)
+            {
+                System.out.println("----------------------");
+                System.out.println((i + 1) + ". " + songList.get(i).title);
 
-            i ++;
-        }
+                i ++;
+            }
         
-        int choice = 0;
+            int choice = 0;
         
-        try
-        {
-            System.out.print("Enter the song number to delete: ");
-            choice = scanner.nextInt();
-        }
-        catch(InputMismatchException exception)
-        {
-            System.out.println("""
+            try
+            {
+                System.out.print("Enter the song number to delete: ");
+                choice = scanner.nextInt();
+            }
+            catch(InputMismatchException exception)
+            {
+                System.out.println("""
 
-                                INCORRECT INPUT
-                                Please only input whole numbers
+                                    INCORRECT INPUT
+                                    Please only input whole numbers
 
-                                """);
+                                    """);
             
             
-            scanner.nextLine();
-            removeSong(songList);
-        }
+                scanner.nextLine();
+                removeSong(songList);
+            }
 
-        if (choice < 1 || choice > (songList.size()))
-        {
-            //Ensures that user enters the number of a song that exists
-            System.out.println("""
+            if (choice < 1 || choice > (songList.size()))
+            {
+                //Ensures that user enters the number of a song that exists
+                System.out.println("""
                 
-                                Number is out of range
-                                Please only  enter a number between 1 and """ + songList.size() +
-                                """
+                                    Number is out of range
+                                    Please only  enter a number between 1 and  """ + songList.size() +
+                                    """
 
 
-                                """);
+                                    """);
                     
     
-            removeSong(songList);
+                removeSong(songList);
+            }
+
+            //Removes chosen song
+            songList.remove(choice - 1);
         }
-
-        //Removes chosen song
-        songList.remove(choice - 1);
-
+        
         return songList;
     }
 
     private static void filterSongs(ArrayList<Song> songList)
     {
-        //Allows user to filter songs out that are below a certain number of plays
-        int filterBy = 0;
-
-        try
+        //Only executes if there are song stored in the list
+        if (! songList.isEmpty())
         {
-            System.out.print("Enter number of plays to filter by: ");
-            filterBy = scanner.nextInt();
-        }
-        catch(InputMismatchException exception)
-        {
-            //Catches exception if user enters a non-integer value
-            System.out.println("""
-                                
-                                INCORRECT INPUT
-                                Please only enter whole numbers
+            //Allows user to filter songs out that are below a certain number of plays
+            int filterBy = 0;
 
-
-                                """);
-            scanner.nextLine();
-            filterSongs(songList);
-        }
-
-        int i = 0;
-        for (Song songs : songList)
-        {
-            if (songList.get(i).playCount > filterBy)
+            try
             {
-            System.out.println("----------------------------------");
-            System.out.println("Title: " + songList.get(i).title);
-            System.out.println("Artist: " + songList.get(i).artist);
-            System.out.println("Play Count: " + songList.get(i).playCount);
+                System.out.print("Enter number of plays to filter by: ");
+                filterBy = scanner.nextInt();
             }
-            i ++;
-        }
+            catch(InputMismatchException exception)
+            {
+                //Catches exception if user enters a non-integer value
+                System.out.println("""
+                                    
+                                    INCORRECT INPUT
+                                    Please only enter whole numbers
 
-        System.out.println();
-        System.out.println("Press enter to return to main menu");
-        
-        try
-        {
-            System.in.read();
-            scanner.nextLine();
-        }
-        catch(Exception e)
-        {
 
+                                    """);
+                scanner.nextLine();
+                filterSongs(songList);
+            }
+
+            int i = 0;
+            for (Song songs : songList)
+            {
+                //Print songs over specified views
+                if (songList.get(i).playCount > filterBy)
+                {
+                System.out.println("----------------------------------");
+                System.out.println("Title: " + songList.get(i).title);
+                System.out.println("Artist: " + songList.get(i).artist);
+                System.out.println("Play Count: " + songList.get(i).playCount);
+                }
+                i ++;
+            }
+
+            System.out.println();
+            System.out.println("Press enter to return to main menu");
+            
+            try
+            {
+                System.in.read();
+                scanner.nextLine();
+            }
+            catch(Exception e)
+            {
+
+            }
         }
     }
 }
