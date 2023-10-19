@@ -78,9 +78,8 @@ public class Main
         if (songList.isEmpty())
         {
             System.out.println("""
-                
-                                No songs in list, please add a song
 
+                                No songs in list, please add a song
 
                                 """);
         }
@@ -115,8 +114,7 @@ public class Main
                             2. Remove a song
                             3. Filter songs by number of plays
                             4. Exit
-                            Enter your choice: 
-                            """);
+                            Enter your choice: """);
             choice = scanner.nextInt();
         }
         catch(InputMismatchException exception)
@@ -126,8 +124,7 @@ public class Main
 
                                 INCORRECT INPUT
                                 Please only enter whole numbers
-
-
+                                
                                 """);
                                         
                                         
@@ -142,7 +139,6 @@ public class Main
 
                                 Number out of range
                                 Please enter a number between 1 and 4
-
 
                                 """);
             menu(songList);
@@ -172,10 +168,13 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
-            System.out.println("INVALID INPUT");
-            System.out.println("Please only input valid data types");
-            System.out.println();
-            System.out.println();
+            System.out.println("""
+                
+                                INVALID INPUT
+                                Please only enter valid data types
+                                
+                                """);
+                    
             scanner.nextLine();
             addSong(songList);
         }
@@ -219,7 +218,6 @@ public class Main
 
                                     """);
             
-            
                 scanner.nextLine();
                 removeSong(songList);
             }
@@ -233,10 +231,8 @@ public class Main
                                     Please only  enter a number between 1 and  """ + songList.size() +
                                     """
 
-
                                     """);
                     
-    
                 removeSong(songList);
             }
 
@@ -267,7 +263,6 @@ public class Main
                                     
                                     INCORRECT INPUT
                                     Please only enter whole numbers
-
 
                                     """);
                 scanner.nextLine();
