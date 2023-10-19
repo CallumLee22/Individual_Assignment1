@@ -75,15 +75,26 @@ public class Main
 
     private static void printSongs(ArrayList<Song> songList)
     {
-        //Loops though songList to print all attributes
-        int i = 0;
-        for (Song songs : songList)
+        if (songList.size() == 0)
         {
-            System.out.println("----------------------------------");
-            System.out.println("Title: " + songList.get(i).title);
-            System.out.println("Artist: " + songList.get(i).artist);
-            System.out.println("Play Count: " + songList.get(i).playCount);
-            i ++;
+            System.out.println("""
+                                No songs in list, please add a song
+
+
+                                """);
+        }
+        else
+        {
+            //Loops though songList to print all attributes
+            int i = 0;
+            for (Song songs : songList)
+            {
+                System.out.println("----------------------------------");
+                System.out.println("Title: " + songList.get(i).title);
+                System.out.println("Artist: " + songList.get(i).artist);
+                System.out.println("Play Count: " + songList.get(i).playCount);
+                i ++;
+            }
         }
     }
 
