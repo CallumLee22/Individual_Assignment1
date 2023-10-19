@@ -110,10 +110,15 @@ public class Main
         catch(InputMismatchException exception)
         {
             //Catches exception if user enters a non-integer value
-            System.out.println("INCORRECT INPUT");
-            System.out.println("Please only input whole numbers");
-            System.out.println();
-            System.out.println();
+            System.out.println("""
+
+                                INCORRECT INPUT
+                                Please only enter whole numbers
+
+
+                                """);
+                                        
+                                        
             scanner.nextLine();
             menu(songList);
         }
@@ -121,10 +126,13 @@ public class Main
         if (choice < 1 || choice > 4)
         {
             //Makes user retry input if they enter a number where a song does not exist
-            System.out.println("Number out of range");
-            System.out.println("Please enter a number between 1 and 4");
-            System.out.println();
-            System.out.println();
+            System.out.println("""
+
+                                Number out of range
+                                Please enter a number between 1 and 4
+
+
+                                """);
             menu(songList);
         }
 
@@ -236,10 +244,13 @@ public class Main
         catch(InputMismatchException exception)
         {
             //Catches exception if user enters a non-integer value
-            System.out.println("INCORRECT INPUT");
-            System.out.println("Please only input whole numbers");
-            System.out.println();
-            System.out.println();
+            System.out.println("""
+                                
+                                INCORRECT INPUT
+                                Please only enter whole numbers
+
+
+                                """);
             scanner.nextLine();
             filterSongs(songList);
         }
