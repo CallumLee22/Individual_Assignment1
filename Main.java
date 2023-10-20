@@ -45,30 +45,19 @@ public class Main
 
     private static ArrayList<Song> addInitialSongs()
     {
-        //Adds preset songs to songList
-        Song Believer = new Song("Believer", "Imagine Dragons", 1203500);
-        Song Skyfall = new Song("Skyfall", "Adele", 14527013);
-        Song Brazil = new Song("Brazil", "Declan McKenna", 123230);
-        Song Africa = new Song("Africa", "TOTO", 443629467);
-        Song Mercy = new Song("Mercy", "Shawn Mendes", 56374537);
-        Song Paris = new Song("Paris", "The Chainsmokers", 567857587);
-        Song Survival = new Song("Survival", "Eminem", 7479358);
-        Song Riptide = new Song("Riptide", "Vance Joy", 6546446);
-        Song Waterloo = new Song("Waterloo", "ABBA", 864946678);
-        Song Perfect = new Song("Perfect", "Ed Sheeran", 664676466);
-
         ArrayList<Song> songList = new ArrayList<Song>();
 
-        songList.add(Believer);
-        songList.add(Skyfall);
-        songList.add(Brazil);
-        songList.add(Africa);
-        songList.add(Mercy);
-        songList.add(Paris);
-        songList.add(Survival);
-        songList.add(Riptide);
-        songList.add(Waterloo);
-        songList.add(Perfect);
+        //Adds preset songs to songList
+        songList.add(new Song("Believer", "Imagine Dragons", 1203500));
+        songList.add(new Song("Skyfall", "Adele", 14527013));
+        songList.add(new Song("Brazil", "Declan McKenna", 123230));
+        songList.add(new Song("Africa", "TOTO", 443629467));
+        songList.add(new Song("Mercy", "Shawn Mendes", 56374537));
+        songList.add(new Song("Paris", "The Chainsmokers", 567857587));
+        songList.add(new Song("Survival", "Eminem", 7479358));
+        songList.add(new Song("Riptide", "Vance Joy", 6546446));
+        songList.add(new Song("Waterloo", "ABBA", 864946678));
+        songList.add(new Song("Perfect", "Ed Sheeran", 664676466));
 
         return songList;
     }
