@@ -7,7 +7,7 @@ public class Main
 
     public static void main(String[] args)
     {
-        //Only called at the start of program to ensure that songList is not reset later
+        // Only called at the start of program to ensure that songList is not reset later
         ArrayList<Song> songList = addInitialSongs();
         mainProcess(songList);
     }
@@ -38,7 +38,7 @@ public class Main
         
             case 5:
         
-                //Exits program
+                // Exits program
                 System.out.println("Exiting program...");
                 System.exit(0);
 
@@ -51,7 +51,7 @@ public class Main
     {
         ArrayList<Song> songList = new ArrayList<Song>();
 
-        //Adds preset songs to songList
+        // Adds preset songs to songList
         songList.add(new Song("Believer", "Imagine Dragons", 1203500));
         songList.add(new Song("Skyfall", "Adele", 14527013));
         songList.add(new Song("Brazil", "Declan McKenna", 123230));
@@ -78,22 +78,20 @@ public class Main
         }
         else
         {
-            //Loops though songList to print all attributes
-            int i = 0;
-            for (Song songs : songList)
+            // Loops though songList to print all attributes
+            for (Song song : songList)
             {
                 System.out.println("----------------------------------");
-                System.out.println("Title: " + songList.get(i).title);
-                System.out.println("Artist: " + songList.get(i).artist);
-                System.out.println("Play Count: " + songList.get(i).playCount);
-                i ++;
+                System.out.println("Title: " + song.title);
+                System.out.println("Artist: " + song.artist);
+                System.out.println("Play Count: " + song.playCount);
             }
         }
     }
 
     private static int menu(ArrayList<Song> songList)
     {
-        //Allows user to choose which function they would like to use
+        // Allows user to choose which function they would like to use
         int choice = 0;
         try
         {
@@ -112,7 +110,7 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
-            //Catches exception if user enters a non-integer value
+            // Catches exception if user enters a non-integer value
             System.out.println("""
 
                                 INCORRECT INPUT
@@ -127,7 +125,7 @@ public class Main
 
         if (choice < 1 || choice > 5)
         {
-            //Makes user retry input if they enter a number where a song does not exist
+            // Makes user retry input if they enter a number where a song does not exist
             System.out.println("""
 
                                 Number out of range
@@ -142,14 +140,14 @@ public class Main
 
     private static ArrayList<Song> addSong(ArrayList<Song> songList)
     {
-        //Allows a user to add a cutom song to the list
+        // Allows a user to add a cutom song to the list
         String title = "";
         String artist = "";
         int playCount = 0;
 
         try
         {
-            //Asks user to enter details of desired song
+            // Asks user to enter details of desired song
             System.out.print("Enter the name of the song: ");
             title = scanner.next();
 
@@ -172,7 +170,7 @@ public class Main
             addSong(songList);
         }
 
-        //Adds new song object to songList
+        // Adds new song object to songList
         Song userSong = new Song(title, artist, playCount);
         songList.add(userSong);
 
@@ -183,13 +181,13 @@ public class Main
     {
         checkIfListIsEmpty(songList);
 
-        //Allows a user to remove a song from songList
-        //Loops through songList to display names of songs that user can choose to remvoe
+        // Allows a user to remove a song from songList
+        // Loops through songList to display names of songs that user can choose to remvoe
         int i = 0;
-        for (Song songs : songList)
+        for (Song song : songList)
         {
             System.out.println("----------------------");
-            System.out.println((i + 1) + ". " + songList.get(i).title);
+            System.out.println((i + 1) + ". " + song.title);
 
             i ++;
         }
@@ -216,7 +214,7 @@ public class Main
 
         if (choice < 1 || choice > (songList.size()))
         {
-            //Ensures that user enters the number of a song that exists
+            // Ensures that user enters the number of a song that exists
             System.out.println("""
              
                                 Number is out of range
@@ -228,7 +226,7 @@ public class Main
             removeSong(songList);
         }
 
-        //Removes chosen song
+        // Removes chosen song
          songList.remove(choice - 1);
         
         
@@ -239,7 +237,7 @@ public class Main
     {
         checkIfListIsEmpty(songList);
 
-        //Allows user to filter songs out that are below a certain number of plays
+        // Allows user to filter songs out that are below a certain number of plays
         int filterBy = 0;
         try
         {
@@ -248,7 +246,7 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
-            //Catches exception if user enters a non-integer value
+            // Catches exception if user enters a non-integer value
             System.out.println("""
                                 
                                 INCORRECT INPUT
@@ -259,18 +257,16 @@ public class Main
             filterSongs(songList);
         }
 
-        int i = 0;
-        for (Song songs : songList)
+        for (Song song : songList)
         {
-            //Print songs over specified views
-            if (songList.get(i).playCount > filterBy)
+            // Print songs over specified views
+            if (song.playCount > filterBy)
             {
             System.out.println("----------------------------------");
-            System.out.println("Title: " + songList.get(i).title);
-            System.out.println("Artist: " + songList.get(i).artist);
-            System.out.println("Play Count: " + songList.get(i).playCount);
+            System.out.println("Title: " + song.title);
+            System.out.println("Artist: " + song.artist);
+            System.out.println("Play Count: " + song.playCount);
             }
-            i ++;
         }
 
         System.out.println();
@@ -289,12 +285,12 @@ public class Main
 
     private static void checkIfListIsEmpty(ArrayList<Song> songList)
     {
-        //Returns user to main menu if there are no songs in the list
+        // Returns user to main menu if there are no songs in the list
         if (songList.isEmpty())
         {
             mainProcess(songList);
         }
-        //User can continue with the function they chose if the list isn't empty
+        // User can continue with the function they chose if the list isn't empty
     }
 
     public static void saveToFile(ArrayList<Song> songList)
@@ -302,6 +298,8 @@ public class Main
         try
         {
             File songFile = new File("./song_list.txt");
+
+            // Prints a message if the file does not exist and therefore one is created
             if (songFile.createNewFile()) 
             {
                 System.out.println("""
@@ -323,18 +321,17 @@ public class Main
             }
             else
             {
-                int i = 0;
-                for (Song songs : songList)
+                // Loop through song list to write all attributes to the file
+                for (Song song : songList)
                 {
                     myWriter.write("----------------------------------");
                     myWriter.newLine();
-                    myWriter.write("Title: " + songList.get(i).title);
+                    myWriter.write("Title: " + song.title);
                     myWriter.newLine();
-                    myWriter.write("Artist: " + songList.get(i).artist);
+                    myWriter.write("Artist: " + song.artist);
                     myWriter.newLine();
-                    myWriter.write("Play Count: " + songList.get(i).playCount);
+                    myWriter.write("Play Count: " + song.playCount);
                     myWriter.newLine();
-                    i ++;
                 }
                 myWriter.close();
                 System.out.println("Successfully wrote song list to the file");
