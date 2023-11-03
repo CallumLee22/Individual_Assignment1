@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Main
 {
@@ -31,8 +32,11 @@ public class Main
             case 3:
         
                 filterSongs(songList);
-        
+
             case 4:
+                saveToFile(songList);
+        
+            case 5:
         
                 //Exits program
                 System.out.println("Exiting program...");
@@ -90,19 +94,19 @@ public class Main
     private static int menu(ArrayList<Song> songList)
     {
         //Allows user to choose which function they would like to use
-
         int choice = 0;
         try
         {
-            System.out.println();
             System.out.print("""
+
                             ----------------------------------
-                            Action Menu
+                            ------------Main Menu-------------
                             ----------------------------------
                             1. Add new song
                             2. Remove a song
                             3. Filter songs by number of plays
-                            4. Exit
+                            4. Save song list to a file
+                            5. Exit
                             Enter your choice: """);
             choice = scanner.nextInt();
         }
@@ -121,7 +125,7 @@ public class Main
             menu(songList);
         }
 
-        if (choice < 1 || choice > 4)
+        if (choice < 1 || choice > 5)
         {
             //Makes user retry input if they enter a number where a song does not exist
             System.out.println("""
@@ -177,113 +181,175 @@ public class Main
 
     private static ArrayList<Song> removeSong(ArrayList<Song> songList)
     {
-        //Only allows user to remove a song if there are songs to remove
-        if (! songList.isEmpty())
+        checkIfListIsEmpty(songList);
+
+        //Allows a user to remove a song from songList
+        //Loops through songList to display names of songs that user can choose to remvoe
+        int i = 0;
+        for (Song songs : songList)
         {
-            //Allows a user to remove a song from songList
-            //Loops through songList to display names of songs that user can choose to remvoe
-            int i = 0;
-            for (Song songs : songList)
-            {
-                System.out.println("----------------------");
-                System.out.println((i + 1) + ". " + songList.get(i).title);
+            System.out.println("----------------------");
+            System.out.println((i + 1) + ". " + songList.get(i).title);
 
-                i ++;
-            }
-        
-            int choice = 0;
-        
-            try
-            {
-                System.out.print("Enter the song number to delete: ");
-                choice = scanner.nextInt();
-            }
-            catch(InputMismatchException exception)
-            {
-                System.out.println("""
-
-                                    INCORRECT INPUT
-                                    Please only input whole numbers
-
-                                    """);
-            
-                scanner.nextLine();
-                removeSong(songList);
-            }
-
-            if (choice < 1 || choice > (songList.size()))
-            {
-                //Ensures that user enters the number of a song that exists
-                System.out.println("""
-                
-                                    Number is out of range
-                                    Please only  enter a number between 1 and  """ + songList.size() +
-                                    """
-
-                                    """);
-                    
-                removeSong(songList);
-            }
-
-            //Removes chosen song
-            songList.remove(choice - 1);
+            i ++;
         }
+        
+        int choice = 0;
+        
+        try
+        {
+            System.out.print("Enter the song number to delete: ");
+            choice = scanner.nextInt();
+        }
+        catch(InputMismatchException exception)
+        {
+            System.out.println("""
+
+                                INCORRECT INPUT
+                                Please only input whole numbers
+
+                                """);
+         
+            scanner.nextLine();
+            removeSong(songList);
+        }
+
+        if (choice < 1 || choice > (songList.size()))
+        {
+            //Ensures that user enters the number of a song that exists
+            System.out.println("""
+             
+                                Number is out of range
+                                Please only  enter a number between 1 and  """ + songList.size() +
+                                """
+
+                                """);
+                 
+            removeSong(songList);
+        }
+
+        //Removes chosen song
+         songList.remove(choice - 1);
+        
         
         return songList;
     }
 
     private static void filterSongs(ArrayList<Song> songList)
     {
-        //Only executes if there are song stored in the list
-        if (! songList.isEmpty())
-        {
-            //Allows user to filter songs out that are below a certain number of plays
-            int filterBy = 0;
+        checkIfListIsEmpty(songList);
 
-            try
+        //Allows user to filter songs out that are below a certain number of plays
+        int filterBy = 0;
+        try
+        {
+            System.out.print("Enter number of plays to filter by: ");
+            filterBy = scanner.nextInt();
+        }
+        catch(InputMismatchException exception)
+        {
+            //Catches exception if user enters a non-integer value
+            System.out.println("""
+                                
+                                INCORRECT INPUT
+                                Please only enter whole numbers
+
+                                """);
+            scanner.nextLine();
+            filterSongs(songList);
+        }
+
+        int i = 0;
+        for (Song songs : songList)
+        {
+            //Print songs over specified views
+            if (songList.get(i).playCount > filterBy)
             {
-                System.out.print("Enter number of plays to filter by: ");
-                filterBy = scanner.nextInt();
+            System.out.println("----------------------------------");
+            System.out.println("Title: " + songList.get(i).title);
+            System.out.println("Artist: " + songList.get(i).artist);
+            System.out.println("Play Count: " + songList.get(i).playCount);
             }
-            catch(InputMismatchException exception)
+            i ++;
+        }
+
+        System.out.println();
+        System.out.println("Press enter to return to main menu");
+        
+        try
+        {
+            System.in.read();
+            scanner.nextLine();
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+
+    private static void checkIfListIsEmpty(ArrayList<Song> songList)
+    {
+        //Returns user to main menu if there are no songs in the list
+        if (songList.isEmpty())
+        {
+            mainProcess(songList);
+        }
+        //User can continue with the function they chose if the list isn't empty
+    }
+
+    public static void saveToFile(ArrayList<Song> songList)
+    {
+        try
+        {
+            File songFile = new File("./song_list.txt");
+            if (songFile.createNewFile()) 
             {
-                //Catches exception if user enters a non-integer value
                 System.out.println("""
-                                    
-                                    INCORRECT INPUT
-                                    Please only enter whole numbers
+
+                                    File created
 
                                     """);
-                scanner.nextLine();
-                filterSongs(songList);
             }
 
-            int i = 0;
-            for (Song songs : songList)
+            FileWriter file = new FileWriter("song_list.txt");
+            BufferedWriter myWriter = new BufferedWriter(file);
+            if (songList.isEmpty())
             {
-                //Print songs over specified views
-                if (songList.get(i).playCount > filterBy)
+                System.out.println("""
+
+                                No songs in list, please add a song
+
+                                """);
+            }
+            else
+            {
+                int i = 0;
+                for (Song songs : songList)
                 {
-                System.out.println("----------------------------------");
-                System.out.println("Title: " + songList.get(i).title);
-                System.out.println("Artist: " + songList.get(i).artist);
-                System.out.println("Play Count: " + songList.get(i).playCount);
+                    myWriter.write("----------------------------------");
+                    myWriter.newLine();
+                    myWriter.write("Title: " + songList.get(i).title);
+                    myWriter.newLine();
+                    myWriter.write("Artist: " + songList.get(i).artist);
+                    myWriter.newLine();
+                    myWriter.write("Play Count: " + songList.get(i).playCount);
+                    myWriter.newLine();
+                    i ++;
                 }
-                i ++;
+                myWriter.close();
+                System.out.println("Successfully wrote song list to the file");
             }
+            mainProcess(songList);
+        }
+        catch(IOException e)
+        {
+            System.out.println("""
+                    
+                                There was an error
+                                Returning to main menu
 
-            System.out.println();
-            System.out.println("Press enter to return to main menu");
-            
-            try
-            {
-                System.in.read();
-                scanner.nextLine();
-            }
-            catch(Exception e)
-            {
-
-            }
+                                """);
+            mainProcess(songList);
         }
     }
 }
