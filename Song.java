@@ -1,8 +1,8 @@
 public class Song
 {
-    String title;
-    String artist;
-    int playCount;
+    public String title;
+    public String artist;
+    public int playCount;
 
     public Song(String title, String artist, int playCount)
     {
