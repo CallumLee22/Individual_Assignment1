@@ -7,7 +7,7 @@ public class Main
 
     public static void main(String[] args)
     {
-        // Only called at the start of program to ensure that songList is not reset later
+        // Only called at the start of program to ensure that songList is not reset later if songs are added or removed
         ArrayList<Song> songList = addInitialSongs();
         mainProcess(songList);
     }
@@ -25,19 +25,16 @@ public class Main
                 mainProcess(songList);
         
             case 2:
-        
                 songList = removeSong(songList);
                 mainProcess(songList);
         
             case 3:
-        
                 filterSongs(songList);
 
             case 4:
                 saveToFile(songList);
         
             case 5:
-        
                 // Exits program
                 System.out.println("Exiting program...");
                 System.exit(0);
@@ -293,7 +290,7 @@ public class Main
         // User can continue with the function they chose if the list isn't empty
     }
 
-    public static void saveToFile(ArrayList<Song> songList)
+    private static void saveToFile(ArrayList<Song> songList)
     {
         try
         {
@@ -334,8 +331,22 @@ public class Main
                     myWriter.newLine();
                 }
                 myWriter.close();
-                System.out.println("Successfully wrote song list to the file");
+                System.out.println();
+                System.out.println("Successfully wrote song list to file 'song_list.txt'");
             }
+            System.out.println();
+            System.out.println("Press enter to return to main menu");
+            
+            try
+            {
+                System.in.read();
+                scanner.nextLine();
+            }
+            catch(Exception e)
+            {
+
+            }
+
             mainProcess(songList);
         }
         catch(IOException e)
