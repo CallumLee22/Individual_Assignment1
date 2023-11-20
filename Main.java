@@ -18,6 +18,7 @@ public class Main
 
         int choice = menu(songList);
 
+        // Takes user input and runs the corresponding function
         switch (choice)
         {
             case 1:
@@ -156,6 +157,7 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
+            // Catches exception if user enters something that is not an integer
             System.out.println("""
                 
                                 INVALID INPUT
@@ -198,6 +200,7 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
+            // Catches exception if user enters something that is not an integer
             System.out.println("""
 
                                 INCORRECT INPUT
@@ -243,7 +246,7 @@ public class Main
         }
         catch(InputMismatchException exception)
         {
-            // Catches exception if user enters a non-integer value
+            // Catches exception if user enters something that is not an integer
             System.out.println("""
                                 
                                 INCORRECT INPUT
@@ -276,7 +279,7 @@ public class Main
         }
         catch(Exception e)
         {
-
+            e.printStackTrace();
         }
     }
 
@@ -315,6 +318,7 @@ public class Main
                                 No songs in list, please add a song
 
                                 """);
+                myWriter.close();
             }
             else
             {
@@ -344,13 +348,14 @@ public class Main
             }
             catch(Exception e)
             {
-
+                e.printStackTrace();
             }
 
             mainProcess(songList);
         }
         catch(IOException e)
         {
+            // Catches any unexpected errors IO errors and returns user to main menu to try again
             System.out.println("""
                     
                                 There was an error
