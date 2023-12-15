@@ -129,7 +129,7 @@ public class Main
             System.out.println("""
 
                                 Number out of range
-                                Please enter a number between 1 and 4
+                                Please enter a number between 1 and 5
 
                                 """);
             menu(songList);
