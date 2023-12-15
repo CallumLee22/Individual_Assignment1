@@ -31,9 +31,11 @@ public class Main
         
             case 3:
                 filterSongs(songList);
+                mainProcess(songList);
 
             case 4:
                 saveToFile(songList);
+                mainProcess(songList);
         
             case 5:
                 // Exits program
